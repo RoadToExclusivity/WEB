@@ -19,7 +19,7 @@ body{
 #navigation{
 	list-style-type: none;
 	margin: 0;
-	padding-top: 16px;
+	padding-top: 10px;
 }
 
 li{
@@ -32,4 +32,17 @@ li{
 	font-size: 17px;
 	text-decoration:none;
 	color: white;
+}
+
+#more_info{
+	font-weight: bold;
+	padding-right: 380px;
+}
+
+#menu_video{
+	font-weight: bold;
+}
+
+#menu_live{
+	font-weight: bold;
 }
