@@ -147,3 +147,9 @@ li{
 	font-size: 11px;
 	font-family: arial;
 }
+
+.img{
+	width: auto;
+	border-image-repeat: stretch;
+	height: 350px;
+}
