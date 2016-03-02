@@ -10,6 +10,25 @@ body{
 }
 
 #logo{
+	margin: 0;
+	padding-left: 10px;
+	position: relative;
+	background-color: #fff;
+	height: 50px;
+	float: left;
+}
+
+#logo_img{
+	float: left;
+	position: relative;
+	height: 40px;
+	width: 100px;
+	background-color: white;
+	padding-left: 10px;
+	top: 5px;
+}
+
+#logo_end{
 	float: left;
 	height: 50px;
 	background-color: white;
@@ -28,7 +47,7 @@ li{
 }
 
 #header a{
-	font-family: Proxima-Nova;
+	font-family: arial;
 	font-size: 17px;
 	text-decoration:none;
 	color: white;
@@ -36,7 +55,7 @@ li{
 
 #more_info{
 	font-weight: bold;
-	padding-right: 380px;
+	padding-right: 350px;
 }
 
 #menu_video{
@@ -45,4 +64,86 @@ li{
 
 #menu_live{
 	font-weight: bold;
+}
+
+.main_body{
+	position: relative;
+	width: 1014px;
+	clear: both;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.trending_menu{
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #e3eaf3;
+}
+
+.trending_list{
+	padding-left: 0px;
+}
+
+#trending_header{
+	text-transform: uppercase;
+	font-family: arial;
+	font-size: 17px;
+	color: #2e538f;
+	font-weight: 700;
+}
+
+.trending_item{
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 17px;
+	font-family: arial;
+	color: #787878;
+}
+
+.latest_headlines{
+	float: left;
+	position: relative;
+	width: 180px;
+	margin-right: 30px;
+}
+
+#headlines_header{
+	font-weight: 700;
+	font-size: 17px;
+	line-height: 18px;
+	font-family: arial;
+	text-transform: uppercase;
+	color: #c3230c;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #9aaecc;
+	padding-bottom: 7px;
+	margin-bottom: 0px;
+}
+.headline_item{
+	padding-top: 10px;
+	border-bottom-style: solid;
+	border-bottom-color: #cad6e8;
+	border-bottom-width: 1px;
+}
+
+.headline_text{
+	position: relative;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 17px;
+	font-family: arial;
+	padding-right: 15px;
+	padding-bottom: 7px;
+	width: 160px;
+	text-decoration: none;
+	color: #333;
+	margin: 0;
+}
+
+.headline_time{
+	text-transform: uppercase;
+	color: #787878;
+	font-size: 11px;
+	font-family: arial;
 }
