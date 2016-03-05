@@ -7,6 +7,7 @@ body{
 		top: 0px;
 		height: 50px;
 		box-shadow: 0px 1px 10px #5E5E5E;
+		clear: both;
 }
 
 #logo{
@@ -35,10 +36,22 @@ body{
 	padding-left: 10px;
 }
 
-#navigation{
+.left_menu{
+	padding-left: 0px;
+	list-style-type: none;
+	margin: 0;
+	padding-top: 16px;
+	float: left;
+}
+
+.right_menu{
+	padding-left: 0px;
 	list-style-type: none;
 	margin: 0;
 	padding-top: 10px;
+	float: left;
+	position: absolute;
+	right: 0px;
 }
 
 li{
@@ -55,7 +68,6 @@ li{
 
 #more_info{
 	font-weight: bold;
-	padding-right: 330px;
 }
 
 #menu_video{
@@ -100,6 +112,10 @@ li{
 	color: #787878;
 }
 
+.trending_item:hover{
+	color: #2e538f;
+}
+
 .latest_headlines{
 	float: left;
 	position: relative;
@@ -141,6 +157,10 @@ li{
 	margin: 0;
 }
 
+.headline_text:hover{
+	color: #2e538f;
+}
+
 .headline_time{
 	text-transform: uppercase;
 	color: #787878;
@@ -180,6 +200,10 @@ li{
 	color: #fff;
 	text-transform: uppercase;
 	margin: 0;
+}
+
+.pic_description:hover{
+	color: #ccc;
 }
 
 .right_arrow{
@@ -259,6 +283,10 @@ li{
 	font-family: arial;
 	margin: 0;
 	padding-bottom: 10px;
+}
+
+.news_header:hover{
+	color: #2e538f;
 }
 
 .news_description{
