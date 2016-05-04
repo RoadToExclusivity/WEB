@@ -1,0 +1,7 @@
+#mainChat{
+	position:relative;
+	float: left;
+	border-right-style: solid;
+	border-right-width: 1px;	
+	border-right-color: #81E414;
+}
