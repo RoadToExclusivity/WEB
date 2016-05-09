@@ -12,6 +12,9 @@
 		{
 			$returnedArray["status"] = "OK";
 			$returnedArray["nickname"] = $user;
+			
+			// session_start();
+			// $_SESSION['user'] = $user;
 		}
 		else
 		{
@@ -26,3 +29,4 @@
 	}
 	
 	echo json_encode($returnedArray);
+?>

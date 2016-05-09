@@ -1,11 +1,38 @@
-#mainChat{
-	position:relative;
-	float: left;
-	border-right-style: solid;
-	border-right-width: 1px;	
-	border-right-color: #81E414;
+#chatContainer{
+	width: 50%;
+	display: flex;
+	height: 300px;
 }
 
-#wrapper{
+#mainChat{
+	border: 1px solid silver;
+	width: 70%;
+	overflow-x: auto;
+	overflow-y: auto;
+}
+
+#chatVisitors{
+	flex-grow: 1;
+	border: 1px solid silver;
+	overflow-y: auto;
+}
+
+#loginResult{
+	color: #ff0000;
+}
+
+#sendForm{
 	width: 50%;
+}
+
+#submitTextLabel{
+	display: inline-block;
+	width: 70%;
+}
+
+#submitTextField{
+}
+
+.chatUsername{
+	color: #2860DE;
 }
