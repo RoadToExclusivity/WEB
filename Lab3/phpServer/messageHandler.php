@@ -10,11 +10,11 @@
 	
 	$user = $_POST['user'];
 	$cmd = $_POST['command'];
+	$resultArray = array();
 	switch ($cmd)
 	{
 		case "new_msg":
 			$msg = $_POST['message'];
-			$resultArray = array('status' => '');
 			$db = new DBHandler();
 			if ($db->addNewMessage($user, $msg))
 			{
@@ -25,14 +25,13 @@
 				$resultArray['status'] = 'FAILED';
 			}
 			$db->close();
-			echo json_encode($resultArray);
+			
 			break;
 		case "get_messages":
 			$db = new DBHandler();
 			$msgs = $db->getAllMessages();
 			$users = array();
 			$messages = array();
-			$resultArray = array();
 			while ($row = $msgs->fetch_assoc())
 			{
 				array_push($users, $row['user']);
@@ -41,8 +40,27 @@
 			$resultArray['users'] = $users;
 			$resultArray['messages'] = $messages;
 			$db->close();
-			echo json_encode($resultArray);
+			
+			break;
+		case "get_visitors":
+			$db = new DBHandler();
+			$visitors = $db->getAllVisitors();
+			$users = array();
+			while ($row = $visitors->fetch_assoc())
+			{
+				array_push($users, $row['user']);
+			}
+			$resultArray['users'] = $users;
+			$db->close();
+			
+			break;
+		case "remove_visitor":
+			$db = new DBHandler();
+			$db->removeVisitor($user);
+			$db->close();
+			
 			break;
 	}
 	
+	echo json_encode($resultArray);
 ?>

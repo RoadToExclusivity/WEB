@@ -1,4 +1,6 @@
 <?php
+	include('DBHandler.class.php');
+	
 	const REGISTERED_USERS = array("denis" => "qwerty", "sanek" => "123321", "serega" => "bottle");
 	
 	$user = $_POST["user"];
@@ -13,6 +15,9 @@
 			$returnedArray["status"] = "OK";
 			$returnedArray["nickname"] = $user;
 			
+			$db = new DBHandler();
+			$db->addNewVisitor($user);
+			$db->close();
 			// session_start();
 			// $_SESSION['user'] = $user;
 		}

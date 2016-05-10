@@ -32,6 +32,25 @@ class DBHandler
 		$result = $this->chatConn->query($queryStr);
 		return $result;
 	}
+	
+	public function addNewVisitor($user)
+	{
+		$queryStr = "INSERT INTO visitors (user) VALUES ('" . $user . "')";
+		return $this->chatConn->query($queryStr);
+	}
+	
+	public function getAllVisitors()
+	{
+		$queryStr = "SELECT * FROM visitors ORDER BY id";
+		$result = $this->chatConn->query($queryStr);
+		return $result;
+	}
+	
+	public function removeVisitor($user)
+	{
+		$queryStr = "DELETE FROM visitors WHERE user='" . $user . "'";
+		return $this->chatConn->query($queryStr);
+	}
 }
 
 ?>

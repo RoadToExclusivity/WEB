@@ -2,6 +2,22 @@ var chat = new function(){
 	var username = "";
 	
 	var exit = function(){
+		var url = 'phpServer/messageHandler.php';
+		var postData = { user : chat.username, command : 'remove_visitor'};
+		
+		$.ajax({
+			type: 'POST',
+			url: url,
+			data: postData,
+			dataType: 'json',
+			success: function(){
+			},
+			error: function(){
+				console.log("[REMOVE_VISITOR] Unhandled server error");
+			}
+		});
+		
+		return "1";
 	}
 	
 	this.login = function(){
@@ -45,10 +61,7 @@ var chat = new function(){
 				{
 					chat.username = userStr;
 					setInterval(chat.updateAll, 200);
-					/* $(window).bind("beforeunload", function()
-					{
-						return null;
-					}); */
+					$(window).onunload = chat.exit;
 				}
 			},
 			error: function(){
@@ -81,6 +94,8 @@ var chat = new function(){
 			success: function(result){
 				if (result.status == "OK"){
 					chat.updateChat();
+					chat.updateVisitors();
+					msgTextField.val('');
 				}
 				else
 				{
@@ -123,6 +138,29 @@ var chat = new function(){
 	}
 	
 	this.updateVisitors = function(){
+		var url = 'phpServer/messageHandler.php';
+		var visitorsWindow = $('#chatVisitors');
+		var postData = { user : chat.username, command : 'get_visitors'};
+		
+		$.ajax({
+			type: 'POST',
+			url: url,
+			data: postData,
+			dataType: 'json',
+			success: function(result){
+				visitorsWindow.empty();
+				for (var i = 0; i < result.users.length; i++){
+					var user = result.users[i];
+					
+					var userLine = "<span class='chatVisitor'>" + user + "</span><br>";
+					visitorsWindow.append(userLine);
+				}
+				visitorsWindow.scrollTop(visitorsWindow[0].scrollHeight);
+			},
+			error: function(){
+				console.log("[LOAD_VISITORS] Unhandled server error");
+			}
+		});
 	}
 	
 	this.updateAll = function(){
