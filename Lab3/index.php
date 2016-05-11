@@ -4,10 +4,11 @@
         <meta charset="utf-8">
         <title>Chat</title>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="js/pageSetup.js"></script>
 		<script src="js/chat.js"></script>
 		<link rel="stylesheet" href="css/styles.css">
     </head>
-    <body>
+    <body onLoad="pageSetup.hideChatControls()">
 		<div id="loginFormContainer">
 			<form id="loginForm">
 				<label>

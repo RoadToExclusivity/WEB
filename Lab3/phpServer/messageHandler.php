@@ -2,15 +2,10 @@
 	
 	include('DBHandler.class.php');
 	
-	// session_start();
-	// if (!isset($_SESSION['user']))
-	// {
-		// die('No user session found');
-	// }
-	
 	$user = $_POST['user'];
 	$cmd = $_POST['command'];
 	$resultArray = array();
+	header('Content-Type: application/json');
 	switch ($cmd)
 	{
 		case "new_msg":

@@ -33,6 +33,15 @@ class DBHandler
 		return $result;
 	}
 	
+	public function isVisitorExists($user)
+	{
+		$queryStr = "SELECT * FROM visitors WHERE user='" . $user . "'";
+		$result = $this->chatConn->query($queryStr);
+		$count = $result->num_rows;
+		
+		return ($count > 0 ? true : false);
+	}
+	
 	public function addNewVisitor($user)
 	{
 		$queryStr = "INSERT INTO visitors (user) VALUES ('" . $user . "')";

@@ -1,23 +1,22 @@
 var chat = new function(){
 	var username = "";
+	var lastMsgCount = 0;
 	
-	var exit = function(){
+	this.exit = function(){
 		var url = 'phpServer/messageHandler.php';
 		var postData = { user : chat.username, command : 'remove_visitor'};
+		console.log(postData);
 		
-		$.ajax({
+		return $.ajax({
+			async: false,
 			type: 'POST',
 			url: url,
 			data: postData,
 			dataType: 'json',
-			success: function(){
-			},
-			error: function(){
+			error: function(result){
 				console.log("[REMOVE_VISITOR] Unhandled server error");
 			}
 		});
-		
-		return "1";
 	}
 	
 	this.login = function(){
@@ -52,6 +51,9 @@ var chat = new function(){
 						case "WRONG_LOGIN":
 							resultLabel.text("Wrong login");
 							break;
+						case "ALREADY_LOGGED":
+							resultLabel.text("User has already logged in");
+							break;
 						default:
 							resultLabel.text("Unknown server response");
 							break;
@@ -59,9 +61,14 @@ var chat = new function(){
 				}
 				else
 				{
+					pageSetup.showChatControls();
+					$('#password').val('');
 					chat.username = userStr;
-					setInterval(chat.updateAll, 200);
-					$(window).onunload = chat.exit;
+					var chatUpdateInterval = setInterval(chat.updateAll, 200);
+					$(window).on('unload', function(){
+						clearInterval(chatUpdateInterval);
+						return chat.exit();
+					});
 				}
 			},
 			error: function(){
@@ -85,7 +92,6 @@ var chat = new function(){
 		}
 		
 		var postData = { user : chat.username, command : 'new_msg', message : msg };
-		console.log(postData);
 		$.ajax({
 			type: 'POST',
 			url: url,
@@ -121,15 +127,19 @@ var chat = new function(){
 			data: postData,
 			dataType: 'json',
 			success: function(result){
-				chatWindow.empty();
-				for (var i = 0; i < result.users.length; i++){
-					var user = result.users[i];
-					var msg = result.messages[i];
-					
-					var userLine = "<span class='chatUsername'>" + user + ": </span>";
-					chatWindow.append(userLine + msg + "<br>");
+				if (result.users.length != chat.lastMsgCount)
+				{
+					chatWindow.empty();
+					for (var i = 0; i < result.users.length; i++){
+						var user = result.users[i];
+						var msg = result.messages[i];
+						
+						var userLine = "<span class='chatUsername'>" + user + ": </span>";
+						chatWindow.append(userLine + msg + "<br>");
+					}
+					chat.lastMsgCount = result.users.length;
+					chatWindow.scrollTop(chatWindow[0].scrollHeight);
 				}
-				chatWindow.scrollTop(chatWindow[0].scrollHeight);
 			},
 			error: function(){
 				console.log("[LOAD_CHAT] Unhandled server error");
@@ -155,7 +165,6 @@ var chat = new function(){
 					var userLine = "<span class='chatVisitor'>" + user + "</span><br>";
 					visitorsWindow.append(userLine);
 				}
-				visitorsWindow.scrollTop(visitorsWindow[0].scrollHeight);
 			},
 			error: function(){
 				console.log("[LOAD_VISITORS] Unhandled server error");
@@ -168,4 +177,3 @@ var chat = new function(){
 		chat.updateVisitors();
 	}
 };
-

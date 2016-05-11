@@ -12,14 +12,20 @@
 	{
 		if (REGISTERED_USERS[$user] == $password)
 		{
-			$returnedArray["status"] = "OK";
-			$returnedArray["nickname"] = $user;
-			
 			$db = new DBHandler();
-			$db->addNewVisitor($user);
+			if ($db->isVisitorExists($user))
+			{
+				$returnedArray["status"] = "FAILED";
+				$returnedArray["message"] = "ALREADY_LOGGED";
+			}
+			else
+			{
+				$returnedArray["status"] = "OK";
+				$returnedArray["nickname"] = $user;
+				$db->addNewVisitor($user);
+			}
+			
 			$db->close();
-			// session_start();
-			// $_SESSION['user'] = $user;
 		}
 		else
 		{
